@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pytoros",
-    version="0.1.0",
+    version="0.1.1",
     description="An unoffical pythonic wrapper for Toros Finance",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",

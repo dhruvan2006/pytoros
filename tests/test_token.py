@@ -19,7 +19,7 @@ class TestToken(unittest.TestCase):
 
         token = Token("ARB:BTCBULL3X")
 
-        address = token._get_token_address('ARB', 'BTCBULL3X')
+        address = token._get_token_address()
         self.assertEqual(address, '0x1234567890abcdef')
     
     @patch('requests.get')
@@ -36,7 +36,7 @@ class TestToken(unittest.TestCase):
         token = Token("ARB:BTCBULL3X")
         
         with self.assertRaises(ValueError):
-            token._get_token_address('ARB', 'BTCBULL3X')
+            token._get_token_address()
     
     @patch('requests.post')
     def test_history_success(self, mock_post):
@@ -76,7 +76,7 @@ class LiveTestToken(unittest.TestCase):
 
     def test_get_token_address_live(self):
         token = Token("ARB:BTCBULL3X")
-        address = token._get_token_address("ARB", "BTCBULL3X")
+        address = token._get_token_address()
         self.assertEqual(address, "0xad38255febd566809ae387d5be66ecd287947cb9")
     
     def test_get_token_history(self):

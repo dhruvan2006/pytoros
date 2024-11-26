@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 requires-python = ">= 3.7"
 name = "pytoros"
-version = "0.1.2"
+version = "0.1.3"
 description = "Download leveraged token data from Toros Finance."
 readme = "README.md"
 keywords = ["leverage", "toros", "crypto"]
@@ -26,8 +26,7 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["pytoros"] 
-include = ["*"]
+include = ["pytoros"]
 
 [project.urls]
 source = "https://github.com/dhruvan2006/pytoros"

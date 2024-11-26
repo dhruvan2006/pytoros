@@ -12,6 +12,13 @@ keywords = ["leverage", "toros", "crypto"]
 authors = [
   {name = "Mohammed Faheem", email = "mohdfaheem.1205@gmail.com"},
   {name = "Dhruvan Gnanadhandayuthapani", email = "dhruvan2006@gmail.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
 ]   
 
 dependencies = [
@@ -27,11 +34,4 @@ include = ["*"]
 [project.urls]
 source = "https://github.com/dhruvan2006/pytoros"
 
-classifiers = [
-    "Development Status :: 4 - Beta"
-    "License :: OSI Approved :: MIT License",
 
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-]

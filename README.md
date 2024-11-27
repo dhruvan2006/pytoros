@@ -2,9 +2,9 @@
 
 Download leveraged token data from [Toros Finance](https://toros.finance/).
 
-![PyPI Version](https://img.shields.io/pypi/v/pytoros)
-![License](https://img.shields.io/github/license/dhruvan2006/pytoros)
-![Downloads](https://img.shields.io/pypi/dm/pytoros)
+[![codecov](https://codecov.io/github/dhruvan2006/pytoros/graph/badge.svg?token=8WH1LQUOGP)](https://codecov.io/github/dhruvan2006/pytoros)
+[![PyPI Version](https://img.shields.io/pypi/v/pytoros)](https://github.com/dhruvan2006/pytoros)
+[![License](https://img.shields.io/github/license/dhruvan2006/pytoros)](https://github.com/dhruvan2006/pytoros)
 
 ## Installation
 ```bash

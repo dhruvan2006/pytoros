@@ -6,15 +6,28 @@ from pytoros import Token
 class TestToken(unittest.TestCase):
     @patch('requests.get')
     def test_get_token_address_success(self, mock_get):
+        mock_html = '''
+        <html>
+            <body>
+                <script id="__NEXT_DATA__" type="application/json">
+                    {
+                        "props": {
+                            "pageProps": {
+                                "categoryMap": {
+                                    "Leverage": [
+                                        {"chainId": 42161, "symbol": "BTCBULL3X", "address": "0x1234567890abcdef"}
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                </script>
+            </body>
+        </html>
+        '''
         mock_response = MagicMock()
         mock_response.status_code = 200
-        mock_response.json.return_value = {
-            'pageProps': {
-                'products': [
-                    {'chainId': 42161, 'symbol': 'BTCBULL3X', 'address': '0x1234567890abcdef'}
-                ]
-            }
-        }
+        mock_response.text = mock_html
         mock_get.return_value = mock_response
 
         token = Token("ARB:BTCBULL3X")
@@ -24,13 +37,27 @@ class TestToken(unittest.TestCase):
     
     @patch('requests.get')
     def test_get_token_address_not_found(self, mock_get):
+        # Mock the HTML response with an empty "Leverage" array
+        mock_html = '''
+        <html>
+            <body>
+                <script id="__NEXT_DATA__" type="application/json">
+                    {
+                        "props": {
+                            "pageProps": {
+                                "categoryMap": {
+                                    "Leverage": []
+                                }
+                            }
+                        }
+                    }
+                </script>
+            </body>
+        </html>
+        '''
         mock_response = MagicMock()
         mock_response.status_code = 200
-        mock_response.json.return_value = {
-            'pageProps': {
-                'products': []
-            }
-        }
+        mock_response.text = mock_html
         mock_get.return_value = mock_response
         
         token = Token("ARB:BTCBULL3X")

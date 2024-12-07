@@ -1,5 +1,7 @@
 import requests
 import pandas as pd
+from bs4 import BeautifulSoup
+import json
 
 class Token:
     """
@@ -11,7 +13,7 @@ class Token:
         "ARB": 42161,   # Arbitrum
         "BASE": 8453,   # Base
     }
-    TOROS_URL = "https://toros.finance/_next/data/mw471zlJ9uL1Ee-_If1FI/category/leverage.json?category=leverage"
+    TOROS_URL = "https://toros.finance/"
     GRAPHQL_URL = "https://api-v2.dhedge.org/graphql"
     SCALE_FACTOR = 10**18
 
@@ -36,14 +38,21 @@ class Token:
     def _get_token_address(self) -> str:
         response = requests.get(self.TOROS_URL, timeout=10)
         response.raise_for_status()
-        data = response.json()
+        html_content = response.text
 
-        chain_id = self._get_chain_id()
-        products = data.get('pageProps', {}).get('products', [])
+        soup = BeautifulSoup(html_content, "html.parser")
+        script_tag = soup.find("script", id="__NEXT_DATA__")
 
-        for product in products:
-            if product.get('chainId') == chain_id and product.get('symbol') == self.symbol:
-                return product.get('address')
+        if script_tag:
+            try:
+                json_data = json.loads(script_tag.string)
+                chain_id = self._get_chain_id()
+                leverage = json_data["props"]["pageProps"]["categoryMap"]["Leverage"]
+                for token in leverage:
+                    if token["chainId"] == chain_id and token["symbol"] == self.symbol:
+                        return token["address"]
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON: {e}")
 
         raise ValueError(f"Token with symbol '{self.symbol}' and chain '{self.chain_name}' not found.")
 
